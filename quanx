@@ -96,9 +96,7 @@ static=🙈 网易云音乐, 解锁节点一, 🚀 节点选择, DIRECT, img-url
 static=🐟 漏网之鱼, 🚀 节点选择, ♻️ 自动选择, 🇭🇰 香港,🇯🇵 日本,🇸🇬 新加坡,🇺🇸 美国, PROXY, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
 
 [server_remote]
-https://yhy456.xyz/link/v6TUBi7PFPWKr0ZH?sub=3, tag=樱花云, update-interval=172800, opt-parser=true, enabled=true
-https://cloud.xiaobaiyunddns.xyz/link/IsyXiNmINbDYtYAb?list=quantumultx, tag=小白云, update-interval=172800, opt-parser=false, enabled=true
-https://www.mojie.pw/api/v1/client/subscribe?token=d1ad63a6442bac18dd81e4fa4c6bdcf7, tag=魔戒.com, update-interval=172800, opt-parser=false, enabled=true
+
 
 [filter_remote]
 # 网易云分流
