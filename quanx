@@ -1,0 +1,242 @@
+# 增加对各个模块的说明(某些内容只适用于 1.0.8 以上版本)
+;⚠️注意⚠️: 以下内容中，带“;” “#”的都是注释符号，去掉前面的符号，该行才有效
+;general 模块内为一些通用的设置参数项
+#[general]
+;Quantumult X 会对 server_check_url 指定的网址进行相应测试，以确认节点的可用性
+;你同样可以在 server_local/remote 中，为节点、订阅单独指定server_check_url参数
+#server_check_url= http://www.qualcomm.cn/generate_204
+
+;资源解析器，可用于自定义各类远程资源的转换，如节点，规则 filter，复写 rewrite 等，url 地址可远程，可 本地/iCloud(Quantumult X/Scripts目录);
+;下面是一个解析器，具体内容直接参照链接里的使用说明
+#resource_parser_url= https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js
+
+;geo_location_checker用于节点页面的信息展示，可完整自定义
+; extreme-ip-lookup为Quantumult X 作者提供的示范 api
+;geo_location_checker=http://extreme-ip-lookup.com/json/, https://raw.githubusercontent.com/crossutility/Quantumult-X/master/sample-location-with-script.js
+;下面是 api 及获取、展示节点信息的 js
+#geo_location_checker=http://ip-api.com/json/?lang=zh-CN, https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/IP_API.js
+
+;dns exclusion list中的域名将不使用fake-ip方式. 其它域名则全部采用 fake-ip 及远程解析的模式
+;dns_exclusion_list=*.qq.com, qq.com
+
+;运行模式模块，running_mode_trigger 设置，即根据网络自动切换 分流/直连/全局代理 等模式。
+;running-mode-trigger 模式下，跟手动切换直连/全局代理 等效，rewrite/task 模块始终会生效，设置简单
+
+;running_mode_trigger=filter, filter, asus-5g:all_direct, asus: all_proxy
+; 上述写法，前两个 filter 表示 在 4G 网络跟一般 Wi-Fi 下，走 filter(分流)模式，asus-5g 则切换为全局直连，asus 切换为全局代理
+
+
+;ssid_suspended_list 写入你想要 Quantumult X 暂停的 Wi-Fi网络名称，多个wifi用“,”连接
+;ssid_suspended_list=Asus, Shawn-Wifi
+
+;UDP名单，留空则默认所有为端口。不在udp白名单列表中的端口，将被丢弃处理。
+;udp_whitelist=53, 123, 1900, 80-443
+
+;下列表中的内容将不经过 QuantumultX的处理
+;excluded_routes= 192.168.0.0/16, 172.16.0.0/12, 100.64.0.0/10, 10.0.0.0/8
+;icmp_auto_reply=true
+# 1、增加自动测速策略组url-latency-benchmark
+# 2、优化策略组，增加香港、日本、新加坡、美国地区分组，并使用自动测速策略
+# 3、优化策略组，取消之前的全球直连和全球拦截策略组，使用系统默认的DIRECT、REJECT策略
+# 4、恢复网易云解锁功能
+# 5、优化分流规则及其他配置内容。
+# 6、本次更新借鉴了Orz-3大佬的配置进行修改，感谢大佬！
+
+
+[general]
+dns_exclusion_list=*.cmpassport.com, *.jegotrip.com.cn, *.icitymobile.mobi, id6.me, *.pingan.com.cn
+geo_location_checker=http://ip-api.com/json/?lang=zh-CN, https://github.com/KOP-XIAO/QuantumultX/raw/master/Scripts/IP_API.js
+resource_parser_url= https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js
+profile_img_url= https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/img/dragonball/1.PNG
+server_check_url=http://www.gstatic.com/generate_204
+#第一个filter为4g模式开启规则分流，第二个filter为其他wifi下开启规则分流，第三个wifi1修改成你路由器翻墙的wifi名开启直连模式，第四个wifi2为你公司或者其他有路由器翻墙的WiFi名走直连）
+#默认关闭根据wifi切换模式，如需开启，删除下方的“#”即可！
+#running_mode_trigger=filter, filter, wifi1:all_direct, wifi2: all_proxy
+
+[dns]
+no-ipv6
+#server=119.29.29.29
+#server=114.114.114.114
+#指定的 dns服务器
+server=114.114.114.114
+server=202.141.176.93 
+server=202.141.178.13
+server=117.50.10.10
+server=223.5.5.5
+server=119.29.29.29:53
+server=119.28.28.28
+;指定域名解析dns
+server=/*.taobao.com/223.5.5.5
+server=/*.tmall.com/223.5.5.5
+server=/*.alipay.com/223.5.5.5
+server=/*.alicdn.com/223.5.5.5
+server=/*.aliyun.com/223.5.5.5
+server=/*.jd.com/119.28.28.28
+server=/*.qq.com/119.28.28.28
+server=/*.tencent.com/119.28.28.28
+server=/*.weixin.com/119.28.28.28
+server=/*.bilibili.com/119.29.29.29
+server=/hdslb.com/119.29.29.29
+server=/*.163.com/119.29.29.29
+server=/*.126.com/119.29.29.29
+server=/*.126.net/119.29.29.29
+server=/*.127.net/119.29.29.29
+server=/*.netease.com/119.29.29.29
+server=/*.mi.com/119.29.29.29
+server=/*.xiaomi.com/119.29.29.29
+;server=/*testflight.apple.com/23.76.66.98
+
+[policy]
+static=🚀 节点选择, ♻️ 自动选择, 🇭🇰 香港,🇯🇵 日本,🇸🇬 新加坡,🇺🇸 美国, PROXY, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Available.png
+# 默认设置10分钟测速一次，当前使用节点延迟和最新测速延迟最低的节点相差100ms以上则切换为最新的最低延迟节点，否则继续延用节点
+url-latency-benchmark=♻️ 自动选择, server-tag-regex=.*, check-interval=600, tolerance=0, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Auto.png
+static=🇭🇰 香港, server-tag-regex=(?=.*(港|HK|(?i)Hong))^((?!(台湾|日本|新加坡|美国|韩国|狮城|南朝鲜|US|SG|JP|KR|TW|台灣|美國|韓國|獅城)).)*$, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Hong_Kong.png
+url-latency-benchmark=🇯🇵 日本, server-tag-regex=(?=.*(日本|JP|(?i)Japan))^((?!(香港|台湾|新加坡|美国|韩国|狮城|南朝鲜|US|SG|KR|HK|TW|台灣|美國|韓國|獅城)).)*$, check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Japan.png
+url-latency-benchmark=🇸🇬 新加坡, server-tag-regex=(?=.*(新加坡|狮城|SG|(?i)Singapore))^((?!(香港|台湾|日本|美国|韩国|南朝鲜|US|JP|KR|HK|TW|台灣|美國|韓國)).)*$, check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Singapore.png
+static=🇺🇸 美国, server-tag-regex=(?=.*(美国|美國|US|洛杉矶|西雅图|(?i)States|American))^((?!(香港|台湾|日本|新加坡|韩国|狮城|南朝鲜|SG|JP|KR|HK|TW|台灣|韓國|獅城)).)*$, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/United_States.png
+static=🙈 网易云音乐, 解锁节点一, 🚀 节点选择, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Netease_Music.png
+static=🐟 漏网之鱼, 🚀 节点选择, ♻️ 自动选择, 🇭🇰 香港,🇯🇵 日本,🇸🇬 新加坡,🇺🇸 美国, PROXY, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Final.png
+
+[server_remote]
+https://yhy456.xyz/link/v6TUBi7PFPWKr0ZH?sub=3, tag=樱花云, update-interval=172800, opt-parser=true, enabled=true
+https://cloud.xiaobaiyunddns.xyz/link/IsyXiNmINbDYtYAb?list=quantumultx, tag=小白云, update-interval=172800, opt-parser=false, enabled=true
+https://www.mojie.pw/api/v1/client/subscribe?token=d1ad63a6442bac18dd81e4fa4c6bdcf7, tag=魔戒.com, update-interval=172800, opt-parser=false, enabled=true
+
+[filter_remote]
+# 网易云分流
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/NetEaseMusic/NetEaseMusic.list, tag=🙈 网易云音乐, force-policy=🙈 网易云音乐, enabled=true
+# Unbreak 后续规则修正
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Unbreak.list, tag=🎯规则修正-直连, update-interval=86400, opt-parser=false, enabled=true
+# Advertising 广告
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Guard/Advertising.list, tag=🛑轻量广告拦截-拒绝, update-interval=86400, opt-parser=false, enabled=true
+# NobyDa大佬去广告 -默认关闭，自行手动启用！
+https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/AdRule.list, tag=🛑重度广告拦截-拒绝, force-policy=reject, update-interval=86400, opt-parser=false, enabled=false
+# Privacy 隐私
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Guard/Privacy.list, tag=🛑隐私保护-拒绝, update-interval=86400, opt-parser=false, enabled=true
+# Hijacking 运营商劫持或恶意网站
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Guard/Hijacking.list, tag=🛑运营商劫持-拒绝, update-interval=86400, opt-parser=false, enabled=true
+# Streaming 国际流媒体服务
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/StreamingMedia/Streaming.list, , tag=🚀 节点选择, force-policy=🚀 节点选择, update-interval=86400, opt-parser=false , enabled=true
+# Global 全球加速
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Global.list, tag=🚀 节点选择, force-policy=🚀 节点选择, update-interval=86400, opt-parser=false , enabled=true
+# China 国内网站
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/China.list, tag=🎯国内网站-直连, force-policy=direct, update-interval=86400, opt-parser=false, enabled=true
+# ChinaIP 中国直连
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Extra/ChinaIP.list, tag=🎯中国IP-直连, update-interval=86400, opt-parser=false , enabled=true
+
+[rewrite_remote]
+https://raw.githubusercontent.com/Fokit/Quantumult-X/main/rewrite/jd_login_help2.sgmodule, tag=京东辅助登陆, update-interval=172800, opt-parser=true, enabled=false
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Block/YouTubeAds.conf, tag=YouTube去广告, update-interval=172800, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/ChuheGit/1/main/Surge/Module/Support.sgmodule, tag=辅助其他模块，无需禁用, update-interval=172800, opt-parser=true, enabled=true
+https://raw.githubusercontent.com/ChuheGit/1/main/Surge/Module/Cookie.sgmodule, tag=cookie 获取成功后禁用, update-interval=172800, opt-parser=true, enabled=false
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.quanx.tf.conf, tag=box测试, update-interval=172800, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.quanx.conf, tag=box稳定, update-interval=172800, opt-parser=false, enabled=true
+
+https://raw.githubusercontent.com/w37fhy/QuantumultX/master/QuantumultX_JS.conf, tag=比价等脚本, update-interval=86400, opt-parser=false, enabled=true
+
+[server_local]
+#解锁网易云音乐节点
+http=106.52.127.72:19951, fast-open=false, udp-relay=false, tag= 解锁节点一
+[filter_local]
+host-suffix, plogin.m.jd.com, direct
+host-suffix, local, direct
+ip-cidr, 192.168.0.0/16, direct
+ip-cidr, 10.0.0.0/8, direct
+ip-cidr, 172.16.0.0/12, direct
+ip-cidr, 127.0.0.0/8, direct
+ip-cidr, 100.64.0.0/10, direct
+ip-cidr, 224.0.0.0/4, direct
+ip6-cidr, fe80::/10, direct
+host-suffix, music.126.net, DIRECT
+#GEOIP,CN,DIRECT
+FINAL,🐟 漏网之鱼
+
+[rewrite_local]
+#获取多ck（优化）
+^https:\/\/me-api\.jd\.com\/user_new\/info\/GetJDUserInfoUnion url script-request-header https://raw.githubusercontent.com/dompling/Script/master/jd/JD_extra_cookie.js
+# 宠汪汪助力更新Token
+^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code= url script-response-body https://jdsharedresourcescdn.azureedge.net/jdresource/jd_joy_run.js
+# 宠汪汪助力获取Token
+^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= url script-request-header https://jdsharedresourcescdn.azureedge.net/jdresource/jd_joy_run.js
+#京喜财福岛的
+^https\:\/\/wq\.jd\.com\/cubeactive\/farm\/dotask url script-request-header https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
+^https\:\/\/m\.jingxi\.com\/dreamfactory\/generator\/CollectCurrentElectricity url script-request-header https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
+^https\:\/\/m\.jingxi\.com\/jxcfd\/consume\/CashOut url script-request-header https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_tokens.js
+#中青
+https:\/\/kd\.youth\.cn\/WebApi\/NewTaskIos\/getTaskList url script-request-header https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js
+
+https:\/\/kandian\.wkandian\.com\/v5\/article\/info\.json url script-request-header https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js
+
+https:\/\/kandian\.wkandian\.com\/v5\/user\/stay\.json url script-request-body https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js
+
+https:\/\/kandian\.wkandian\.com\/v5\/task\/browse_start\.json url script-request-body https://raw.githubusercontent.com/Sunert/Script/master/Task/youth_gain.js
+
+https:\/\/kandian\.wkandian\.com\/v5\/Nameless\/adlickstart\.json url script-request-body https://raw.githubusercontent.com/Sunert/Script/master/Task/youth_gain.js
+
+https:\/\/kandian\.wkandian\.com\/v5\/\w+\/withdraw\d?\.json url script-request-body https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js
+#yy的多ck登陆
+https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion  url script-request-header https://raw.githubusercontent.com/dompling/Script/master/jd/JD_extra_cookie.js
+
+
+[task_local]
+10 0,20 * * * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_necklace.js, tag=京东点点券, img-url=https://ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 0 * * * https://ghproxy.com/https://raw.githubusercontent.com/ztxtop/x/aa4ddeca813fbf5c231dd4adaec68a7632cb292c/jx_cfdtx.js, tag=京喜财富岛提现并发修改版ztxtop, img-url=https://ghproxy.com/https://raw.githubusercontent.com/ChuheGit/1/main/QuantumultX/Gallery/API-Icon/jx_cfd_exchange.png, enabled=true
+15 10 * * * https://raw.githubusercontent.com/zooPanda/zoo/dev/zooElecsport.js, tag=东东电竞经理panda, enabled=true
+30 7 * * * https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_ddnc_farmpark.js, tag=东东乐园wenmou, enabled=true
+30 7 * * * jd_xgyl.js, tag=小鸽有礼文本版, enabled=true
+12 0-23/6 * * * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_pigPet.js, tag=京东金融养猪猪, img-url=https://ghproxy.com/https://raw.githubusercontent.com/58xinian/icon/master/jdyz.png, enabled=true
+1,17,32,47 5,23,5-23 * * * https://raw.githubusercontent.com/Sunert/Script/master/Task/youth.js, tag=中青看点, enabled=true
+20 13 * * 6 https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_get_share_code.js, tag=获取互助码, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+10 * * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_dreamFactory.js, tag=京喜工厂, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+1 7-21/2 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png, enabled=true
+20 8 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_sgmh.js, tag=闪购盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+15 6-18/6 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_pet.js, tag=东东萌宠, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png, enabled=true
+10 * * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_jdfactory.js, tag=东东工厂, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_factory.png, enabled=true
+23 0-23 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_health_collect.js, tag=东东健康社区收集能量, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+13 1,6,22 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_health.js, tag=东东健康社区, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+5 6-18/6 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_fruit.js, tag=东东农场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png, enabled=true
+10 1,12 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_crazy_joy_coin.js, tag=crazyJoy挂机, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=false
+10 12 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_crazy_joy_bonus.js, tag=监控crazyJoy分红, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
+10 9 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_crazy_joy.js, tag=crazyJoy任务, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_crazy_joy.png, enabled=true
+0 0 0 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
+1 0-23/1 * 6 * https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_618redpacket.js, tag=省钱大赢家之翻翻乐（wenmoux, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+10 7 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
+2 9 * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_bean_change.js, tag=京东资产变动通知, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+0 0,19-23/2 * 6-7 * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_mohe.js, tag=京东5G超级盲盒, img-url=https://ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 9,12,18 * * * https://git.xincmm.com/pu/MyActions/raw/branch/main/jd_jxnc.js, tag=京东京喜农场, img-url=https://ghproxy.com/https://raw.githubusercontent.com/58xinian/icon/master/jxnc.png, enabled=true
+5 0,23 * * * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_club_lottery.js, tag=摇京豆, img-url=https://ghproxy.com/https://raw.githubusercontent.com/58xinian/icon/master/jdyjd.png, enabled=true
+4 10 * * * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_market_lottery.js, tag=京东幸运大转盘隐藏姓名版, img-url=https://ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+5 6-18/6 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_fruit.js, tag=东东水果, enabled=true
+55 23 * * * https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/jd_scripts-1/master/jd_unsubscribe.js, tag=取关京东店铺商品, img-url=https://ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 * * * * https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_zoo.js, tag=动物联盟yang版, enabled=false
+30 6,12,22 * * * https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd_exchange.js, tag=京喜财富岛兑换唤醒, img-url=https://raw. githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+42 * * * * https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/ icon/master/jxcfd.png, enabled=true
+0 22 * * 6 https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_delCoupon.js, tag=删除京东APP我的-优惠券, enabled=true
+1 12,23 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_family.js, tag=京东家庭号, enabled=true
+13 1,22 * 6-12 * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_gold_creator.js, tag=金榜创造营, enabled=true
+10 7 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_kd.js, tag=京东快递签到, enabled=true
+10-20/5 12 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_live.js, tag=京东直播 活动结束时间未知, enabled=true
+0 18 10,11 6 * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_live_redrain.js, tag=超级直播间红包雨, enabled=true
+2 0-23/4 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_cash.js, tag=签到领现金，每日2毛～5毛, enabled=true
+0 0 1 * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_car_exchange.js, tag=京东汽车兑换，500赛点兑换500京豆, enabled=true
+10 7 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_car.js, tag=京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可, enabled=true
+10 7 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_ms.js, tag=京东秒秒币, enabled=true
+35 1,23 1-22 6 * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_nzmh.js, tag=京东app-女装活动馆-赢京豆, enabled=true
+10 0 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_shop.js, tag=进店领豆,每天可拿四京豆, enabled=true
+5 7 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_speed_sign.js, tag=京东极速版签到+赚现金任务, enabled=true
+0 1,21 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_star_shop.js, tag=明星小店(星店长), enabled=true
+10 0,7,23 * * * https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_syj.js, tag=赚京豆脚本, enabled=true
+11 1 * * * https://ghproxy.com/https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js, tag=京东抽奖机, img-url=https://ghproxy.com/https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png, enabled=true
+0 9 * * * https://ghproxy.com/https://raw.githubusercontent.com/whyour/hundun/master/quanx/jdzz.js, tag=京东赚赚, img-url=https://ghproxy.com/https://raw.githubusercontent.com/58xinian/icon/master/jdzz.png, enabled=true
+10 * * * * https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_coin.js, tag=京东京喜牧场刷金币mopo, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/mopo.png, enabled=true
+0 * * * * https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js, tag=京东京喜牧场mopo, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/mopo.png, enabled=true
+0-59/30 * * * * https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_emptycabbage.js, tag=京喜牧场清空白菜mopo, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/mopo.png, enabled=true
+0 10 * * * https://ghproxy.com/https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/zy_618jc.js, tag=京东618竞猜, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/Ariszy.png, enabled=true
+30 0 * * * https://ghproxy.com/https://raw.githubusercontent.com/oujisome/jdshell/main/jd_half_redrain.js, tag=京东半点京豆雨龙珠, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/longzhu.png, enabled=true
+0 9 * * * https://ghproxy.com/https://raw.githubusercontent.com/oujisome/jdshell/main/jd_super_redrain.js, tag=京东整点京豆雨龙珠, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/longzhu.png, enabled=true
+31 5,23,5-23 * * * https://raw.githubusercontent.com/chavyleung/scripts/master/box/switcher/box.switcher.js, tag=会话切换, img-url=arrowtriangle.right.fill.system, enabled=true
+11 7 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+1 * * * * https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js, tag=京东京享值PK, img-url=https://ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+[mitm]
