@@ -9,7 +9,6 @@ USER-AGENT,ting_en,大陆服务
 USER-AGENT,WebTorrent*,大陆服务
 USER-AGENT,WeChat*,大陆服务
 
-# China Bank
 # > Agricultural Bank of China
 HOST-SUFFIX,abchina.com,大陆服务
 
@@ -48,15 +47,40 @@ USER-AGENT,coffeecorp*,大陆服务
 USER-AGENT,restaurant-mobile*,大陆服务
 
 # > Bank of China
+HOST-SUFFIX,bank-of-china.com,大陆服务
+HOST-SUFFIX,bankofchina.com,大陆服务
 HOST-SUFFIX,boc.cn,大陆服务
+HOST-SUFFIX,bocaviation.com,大陆服务
+HOST-SUFFIX,boccfc.cn,大陆服务
+HOST-SUFFIX,bocfullertonbank.com,大陆服务
+HOST-SUFFIX,bocgi.com,大陆服务
+HOST-SUFFIX,bocgins.com,大陆服务
+HOST-SUFFIX,bochk.com,大陆服务
+HOST-SUFFIX,bochkonline.com,大陆服务
+HOST-SUFFIX,bocichina.com,大陆服务
+HOST-SUFFIX,bocigroup.com,大陆服务
+HOST-SUFFIX,bocim.com,大陆服务
+HOST-SUFFIX,bocservices.com.cn,大陆服务
+HOST-SUFFIX,ftcwifi.com,大陆服务
 
 # > China Citic Bank
 HOST-SUFFIX,citicbank.com,大陆服务
 HOST-SUFFIX,ecitic.com,大陆服务
 
 # > China Construction Bank
+HOST-SUFFIX,ccb-life.com.cn,大陆服务
+HOST-SUFFIX,ccb.cn,大陆服务
 HOST-SUFFIX,ccb.com,大陆服务
 HOST-SUFFIX,ccb.com.cn,大陆服务
+HOST-SUFFIX,ccbcos.com,大陆服务
+HOST-SUFFIX,ccbfund.cn,大陆服务
+HOST-SUFFIX,ccbfutures.com,大陆服务
+HOST-SUFFIX,ccbhome.cn,大陆服务
+HOST-SUFFIX,ccbhome.net,大陆服务
+HOST-SUFFIX,ccbintl.com.hk,大陆服务
+HOST-SUFFIX,ccbleasing.com,大陆服务
+HOST-SUFFIX,ccbseoul.com,大陆服务
+HOST-SUFFIX,ccbtrust.com.cn,大陆服务
 
 # > China Everbright Bank
 HOST-SUFFIX,cebbank.com,大陆服务
